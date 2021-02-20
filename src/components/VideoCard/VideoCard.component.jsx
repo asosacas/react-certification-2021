@@ -2,14 +2,10 @@ import React from 'react';
 
 import { StyledCard } from './VideoCard.styled';
 
-const VideoCard = ({
-  data: {
-    snippet: { thumbnails, title, description },
-  },
-}) => {
+const VideoCard = ({ snippet: { thumbnails, title, description } }) => {
   return (
     <StyledCard>
-      <StyledCard.Thumbnail src={thumbnails.medium.url} alt="" />
+      <StyledCard.Thumbnail src={thumbnails?.medium?.url} alt={title} />
       <StyledCard.Title>{title}</StyledCard.Title>
       <StyledCard.Description>{description}</StyledCard.Description>
     </StyledCard>

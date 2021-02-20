@@ -5,7 +5,7 @@ import { StyledGrid } from './VideoGrid.styled';
 const VideoGrid = ({ data: { items } }) => (
   <StyledGrid>
     {items.map((item) => (
-      <VideoCard key={item.etag} data={item} />
+      <VideoCard key={item.etag} {...item} />
     ))}
   </StyledGrid>
 );
