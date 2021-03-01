@@ -1,9 +1,13 @@
 import React from 'react';
 
-import './Layout.styles.css';
+import Header from 'components/Header';
+import { StyledMain } from './Layout.styled';
 
-function Layout({ children }) {
-  return <main className="container">{children}</main>;
-}
+const Layout = ({ children }) => (
+  <StyledMain>
+    <Header />
+    {children}
+  </StyledMain>
+);
 
 export default Layout;
