@@ -8,12 +8,7 @@ export const StyledNavBar = styled.nav`
   display: flex;
   justify-content: space-between;
   color: ${(props) => props.theme.fontColorContrast};
-  position: fixed;
-  top: 0;
-
-  + div {
-    margin-top: 60px;
-  }
+  position: sticky;
 
   svg {
     height: 30px;

@@ -1,11 +1,10 @@
 import React from 'react';
 import VideoGrid from 'components/VideoGrid';
-import api from 'api';
 
-const HomePage = () => {
+const HomePage = ({ search }) => {
   return (
     <>
-      <VideoGrid data={api.getData()} />
+      <VideoGrid search={search} />
     </>
   );
 };
