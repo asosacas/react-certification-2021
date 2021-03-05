@@ -1,5 +1,4 @@
-import React from 'react';
-import { act, render } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import api from 'api';
 import useVideoDetails from './videoDetails.hook';
