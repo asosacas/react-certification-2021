@@ -1,32 +1,57 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import VideoCarrousel from './VideoCarrousel.component';
 
-const videoItem = {
-  snippet: {
-    title: 'Title',
-    description: 'This is the description',
-    thumbnails: {
-      medium: {
-        url: 'http://theurl.com',
+const videoData = [
+  {
+    etag: '1',
+    id: { videoId: 'testVideoId1' },
+    snippet: {
+      title: 'Title 1',
+      description: 'This is the description',
+      thumbnails: {
+        medium: {
+          url: 'http://theurl.com',
+        },
       },
     },
   },
-};
+  {
+    etag: '2',
+    id: { videoId: 'testVideoId2' },
+    snippet: {
+      title: 'Title 2',
+      description: 'This is the description 2',
+      thumbnails: {
+        medium: {
+          url: 'http://theurl2.com',
+        },
+      },
+    },
+  },
+];
 
-describe('video card', () => {
-  it('img is rendered are present', () => {
-    render(<VideoCarrousel {...videoItem} />);
-    expect(document.querySelectorAll('img').length).toBe(1);
+describe('video carrousel', () => {
+  it('correct number of video cards', () => {
+    render(<VideoCarrousel videoList={videoData} />);
+    expect(document.querySelectorAll('img').length).toBe(2);
   });
 
-  it('img has alt text', () => {
-    render(<VideoCarrousel {...videoItem} />);
-    expect(screen.queryByAltText('Title').tagName).toBe('IMG');
+  it('title as alt text present', () => {
+    render(<VideoCarrousel videoList={videoData} />);
+    expect(screen.queryByAltText('Title 1').tagName).toBe('IMG');
   });
 
   it('title is rendered', () => {
-    render(<VideoCarrousel {...videoItem} />);
-    expect(screen.queryByText('Title').tagName).toBe('H3');
+    render(<VideoCarrousel videoList={videoData} />);
+    expect(screen.queryByText('Title 1').tagName).toBe('DIV');
+  });
+
+  it('clicks inside card handle setter correctly', () => {
+    const mockedSet = jest.fn();
+    render(<VideoCarrousel videoList={videoData} setSelectedVideo={mockedSet} />);
+    expect(mockedSet.mock.calls.length).toBe(0);
+    fireEvent.click(screen.getByText(/Title 1/i));
+    expect(mockedSet.mock.calls.length).toBe(1);
   });
 });

@@ -1,6 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
+import api from 'api';
 import VideoGrid from './VideoGrid.component';
+
+jest.mock('api');
 
 const videoData = [
   {
@@ -29,9 +32,12 @@ const videoData = [
   },
 ];
 
-describe('video card', () => {
-  it('has the right amount of img elements', () => {
-    render(<VideoGrid data={{ items: videoData }} />);
+api.searchVideos.mockResolvedValue({ items: videoData });
+describe('video grid', () => {
+  it('has the right amount of img elements', async () => {
+    await act(async () => {
+      render(<VideoGrid />);
+    });
     expect(document.querySelectorAll('img').length).toBe(2);
   });
 });
