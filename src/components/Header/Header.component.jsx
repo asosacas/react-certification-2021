@@ -14,7 +14,7 @@ const Header = ({ setSearch }) => {
       <StyledNavBar.Left>
         <FaBars />
         <form onSubmit={onSubmit}>
-          <InputText onChange={setTempSearch} />
+          <InputText onChange={(e) => setTempSearch(e.target.value)} value={tempSearch} />
         </form>
       </StyledNavBar.Left>
       <StyledNavBar.Right>

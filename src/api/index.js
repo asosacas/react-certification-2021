@@ -9,14 +9,12 @@ const apiUrlBuilder = (endpoint, queryParams) => {
 };
 
 export default {
-  searchVideos: (searchValue) => {
-    return fetch(apiUrlBuilder('search', { q: searchValue })).then((response) =>
+  searchVideos: (searchValue) =>
+    fetch(apiUrlBuilder('search', { q: searchValue })).then((response) =>
       response.json()
-    );
-  },
-  getRelatedVideos: (videoId) => {
-    return fetch(
-      apiUrlBuilder('search', { relatedToVideoId: videoId })
-    ).then((response) => response.json());
-  },
+    ),
+  getRelatedVideos: (videoId) =>
+    fetch(apiUrlBuilder('search', { relatedToVideoId: videoId })).then((response) =>
+      response.json()
+    ),
 };

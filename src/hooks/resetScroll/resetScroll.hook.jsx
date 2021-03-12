@@ -7,7 +7,7 @@ const useResetScroll = () => {
       resetScrollRef.current.scrollLeft = 0;
       resetScrollRef.current.scrollTop = 0;
     }
-  });
+  }, []);
   return resetScrollRef;
 };
 export default useResetScroll;

@@ -1,5 +1,6 @@
 import React from 'react';
 import useResetScroll from 'hooks/resetScroll';
+import SanitizedHTML from 'ui/SanitizedHTML';
 import { StyledCarrousel } from './VideoCarrousel.styled';
 
 const VideoCarrousel = ({ videoList, setSelectedVideo }) => {
@@ -19,7 +20,9 @@ const VideoCarrousel = ({ videoList, setSelectedVideo }) => {
           return (
             <StyledCarrousel.Video key={videoId} onClick={() => setSelectedVideo(item)}>
               <StyledCarrousel.Thumbnail src={thumbnails?.medium?.url} alt={title} />
-              <StyledCarrousel.Title>{title}</StyledCarrousel.Title>
+              <StyledCarrousel.Title>
+                <SanitizedHTML html={title} />
+              </StyledCarrousel.Title>
             </StyledCarrousel.Video>
           );
         })}
