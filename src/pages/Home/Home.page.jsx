@@ -1,10 +1,10 @@
 import React from 'react';
 import VideoGrid from 'components/VideoGrid';
 
-const HomePage = ({ search }) => {
+const HomePage = () => {
   return (
     <>
-      <VideoGrid search={search} />
+      <VideoGrid />
     </>
   );
 };

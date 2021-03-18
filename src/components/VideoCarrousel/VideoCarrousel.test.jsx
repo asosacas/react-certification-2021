@@ -44,7 +44,7 @@ describe('video carrousel', () => {
 
   it('title is rendered', () => {
     render(<VideoCarrousel videoList={videoData} />);
-    expect(screen.queryByText('Title 1').tagName).toBe('DIV');
+    expect(screen.queryByText('Title 1').tagName).toBe('SPAN');
   });
 
   it('clicks inside card handle setter correctly', () => {

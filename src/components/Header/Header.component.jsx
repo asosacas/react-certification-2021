@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import InputText from 'ui/InputText';
-import { FaBars, FaUserCircle, FaSun } from 'react-icons/fa';
+import { FaBars, FaUserCircle, FaSun, FaMoon } from 'react-icons/fa';
+import { useGlobalState } from 'providers/GlobalStateProvider';
 import { StyledNavBar } from './Header.styled';
 
-const Header = ({ setSearch }) => {
-  const [tempSearch, setTempSearch] = useState();
+const ThemeIconMap = {
+  light: FaSun,
+  dark: FaMoon,
+};
+
+const Header = () => {
+  const [tempSearch, setTempSearch] = useState('');
+  const {
+    state: { theme },
+    dispatch,
+  } = useGlobalState();
   const onSubmit = (ev) => {
-    setSearch(tempSearch);
+    dispatch({ type: 'setSearch', value: tempSearch });
     ev.preventDefault();
   };
   return (
@@ -18,7 +28,16 @@ const Header = ({ setSearch }) => {
         </form>
       </StyledNavBar.Left>
       <StyledNavBar.Right>
-        <FaSun />
+        <StyledNavBar.ThemeSwitch
+          onClick={() =>
+            dispatch({
+              type: 'updateTheme',
+              value: theme === 'light' ? 'dark' : 'light',
+            })
+          }
+        >
+          {React.createElement(ThemeIconMap[theme])}
+        </StyledNavBar.ThemeSwitch>
         <FaUserCircle />
       </StyledNavBar.Right>
     </StyledNavBar>
