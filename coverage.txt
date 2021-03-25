@@ -1,46 +1,85 @@
- PASS  src/components/VideoGrid/VideoGrid.test.jsx
- PASS  src/components/VideoCard/VideoCard.test.jsx
- PASS  src/components/Header/Header.test.jsx
- PASS  src/components/Layout/Layout.test.jsx
---------------------------|----------|----------|----------|----------|-------------------|
-File                      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
---------------------------|----------|----------|----------|----------|-------------------|
-All files                 |    78.79 |      100 |    78.57 |    78.79 |                   |
- src                      |        0 |      100 |      100 |        0 |                   |
-  index.js                |        0 |      100 |      100 |        0 |                 7 |
-  themes.jsx              |        0 |        0 |        0 |        0 |                   |
- src/api                  |        0 |      100 |        0 |        0 |                   |
-  index.js                |        0 |      100 |        0 |        0 |             1,882 |
- src/components/App       |        0 |      100 |        0 |        0 |                   |
-  App.component.jsx       |        0 |      100 |        0 |        0 |               8,9 |
-  index.js                |        0 |        0 |        0 |        0 |                   |
- src/components/Header    |      100 |      100 |      100 |      100 |                   |
-  Header.component.jsx    |      100 |      100 |      100 |      100 |                   |
-  Header.styled.jsx       |      100 |      100 |      100 |      100 |                   |
-  index.js                |        0 |        0 |        0 |        0 |                   |
- src/components/Layout    |      100 |      100 |      100 |      100 |                   |
-  Layout.component.jsx    |      100 |      100 |      100 |      100 |                   |
-  Layout.styled.jsx       |      100 |      100 |      100 |      100 |                   |
-  index.js                |        0 |        0 |        0 |        0 |                   |
- src/components/VideoCard |      100 |      100 |      100 |      100 |                   |
-  VideoCard.component.jsx |      100 |      100 |      100 |      100 |                   |
-  VideoCard.styled.jsx    |      100 |      100 |      100 |      100 |                   |
-  index.js                |        0 |        0 |        0 |        0 |                   |
- src/components/VideoGrid |      100 |      100 |      100 |      100 |                   |
-  VideoGrid.component.jsx |      100 |      100 |      100 |      100 |                   |
-  VideoGrid.styled.jsx    |      100 |      100 |      100 |      100 |                   |
-  index.js                |        0 |        0 |        0 |        0 |                   |
- src/pages/Home           |        0 |      100 |        0 |        0 |                   |
-  Home.page.jsx           |        0 |      100 |        0 |        0 |               5,6 |
-  index.js                |        0 |        0 |        0 |        0 |                   |
- src/ui/InputText         |      100 |      100 |      100 |      100 |                   |
-  InputText.component.jsx |      100 |      100 |      100 |      100 |                   |
-  InputText.styled.jsx    |      100 |      100 |      100 |      100 |                   |
-  index.js                |        0 |        0 |        0 |        0 |                   |
---------------------------|----------|----------|----------|----------|-------------------|
+-----------------------------------|----------|----------|----------|----------|-------------------|
+File                               |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+-----------------------------------|----------|----------|----------|----------|-------------------|
+All files                          |    86.51 |    74.14 |    77.14 |    87.62 |                   |
+ src                               |        0 |      100 |      100 |        0 |                   |
+  index.js                         |        0 |      100 |      100 |        0 |                 9 |
+  themes.jsx                       |        0 |        0 |        0 |        0 |                   |
+ src/api                           |     9.09 |        0 |        0 |     9.09 |                   |
+  index.js                         |     9.09 |        0 |        0 |     9.09 |... 21,22,24,25,27 |
+ src/components/App                |      100 |      100 |      100 |      100 |                   |
+  App.component.jsx                |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/FavoriteStar       |       50 |       75 |    33.33 |       50 |                   |
+  FavoriteStar.component.jsx       |    44.44 |       75 |    33.33 |    44.44 |    10,18,19,26,27 |
+  FavoriteStar.styled.jsx          |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/FavoritesVideoGrid |    90.91 |       50 |      100 |       90 |                   |
+  FavoritesVideoGrid.component.jsx |    90.91 |       50 |      100 |       90 |                16 |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/Header             |    95.65 |     37.5 |     87.5 |    95.65 |                   |
+  Header.component.jsx             |    92.86 |     37.5 |       80 |    92.86 |                57 |
+  Header.styled.jsx                |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/HomeVideoGrid      |    84.62 |       75 |      100 |    84.62 |                   |
+  HomeVideoGrid.component.jsx      |    84.62 |       75 |      100 |    84.62 |             22,23 |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/Layout             |      100 |      100 |      100 |      100 |                   |
+  Layout.component.jsx             |      100 |      100 |      100 |      100 |                   |
+  Layout.styled.jsx                |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/VideoCard          |      100 |      100 |      100 |      100 |                   |
+  VideoCard.component.jsx          |      100 |      100 |      100 |      100 |                   |
+  VideoCard.styled.jsx             |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/VideoCarrousel     |    93.75 |       75 |      100 |    93.75 |                   |
+  VideoCarrousel.component.jsx     |    90.91 |       75 |      100 |    90.91 |                21 |
+  VideoCarrousel.styled.jsx        |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/VideoDetail        |      100 |      100 |      100 |      100 |                   |
+  VideoDetail.component.jsx        |      100 |      100 |      100 |      100 |                   |
+  VideoDetail.styled.jsx           |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/components/VideoGrid          |    90.91 |      100 |    71.43 |      100 |                   |
+  VideoGrid.component.jsx          |    90.48 |      100 |    71.43 |      100 |                   |
+  VideoGrid.styled.jsx             |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/hooks/resetScroll             |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+  resetScroll.hook.jsx             |      100 |      100 |      100 |      100 |                   |
+ src/hooks/videoDetails            |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+  videoDetails.hook.jsx            |      100 |      100 |      100 |      100 |                   |
+ src/pages/Favorites               |      100 |      100 |      100 |      100 |                   |
+  Favorites.page.jsx               |      100 |      100 |      100 |      100 |                   |
+  Favorites.styled.jsx             |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/pages/Home                    |      100 |      100 |      100 |      100 |                   |
+  Home.page.jsx                    |      100 |      100 |      100 |      100 |                   |
+  Home.styled.jsx                  |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/pages/NotFound                |      100 |      100 |      100 |      100 |                   |
+  NotFound.page.jsx                |      100 |      100 |      100 |      100 |                   |
+  NotFound.styled.jsx              |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/providers/GlobalStateProvider |    96.15 |      100 |    83.33 |      100 |                   |
+  GlobalStateProvider.provider.jsx |    96.15 |      100 |    83.33 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/test                          |      100 |      100 |      100 |      100 |                   |
+  index.jsx                        |      100 |      100 |      100 |      100 |                   |
+ src/ui/InputText                  |      100 |      100 |      100 |      100 |                   |
+  InputText.component.jsx          |      100 |      100 |      100 |      100 |                   |
+  InputText.styled.jsx             |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/ui/SanitizedHTML              |      100 |      100 |      100 |      100 |                   |
+  SanitizedHTML.component.jsx      |      100 |      100 |      100 |      100 |                   |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+ src/utils/ProtectedRoute          |    16.67 |        0 |        0 |    16.67 |                   |
+  ProtectedRoute.component.jsx     |    16.67 |        0 |        0 |    16.67 |       6,7,8,10,14 |
+  index.js                         |        0 |        0 |        0 |        0 |                   |
+-----------------------------------|----------|----------|----------|----------|-------------------|
 
-Test Suites: 4 passed, 4 total
-Tests:       8 passed, 8 total
+Test Suites: 14 passed, 14 total
+Tests:       32 passed, 32 total
 Snapshots:   0 total
-Time:        3.849s
-Ran all test suites.
+Time:        7.388s

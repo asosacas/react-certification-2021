@@ -1,16 +1,25 @@
 import React from 'react';
+import FavoriteStar from 'components/FavoriteStar';
 import useVideoDetails from 'hooks/videoDetails';
 import useResetScroll from 'hooks/resetScroll';
 import SanitizedHTML from 'ui/SanitizedHTML';
 import { StyledOverlay } from './VideoDetail.styled';
 import VideoCarrousel from '../VideoCarrousel';
 
-const VideoDetail = ({ selectedVideo, setSelectedVideo }) => {
-  const containerRef = useResetScroll();
+const VideoDetail = ({
+  selectedVideo,
+  relatedMode = 'api',
+  setSelectedVideo,
+  onClose,
+}) => {
+  const containerRef = useResetScroll(selectedVideo);
   const { title, description, publishTime, relatedVideos } = useVideoDetails(
-    selectedVideo
+    selectedVideo,
+    relatedMode
   );
-  const closeVideo = () => setSelectedVideo(null);
+  const closeVideo = () => {
+    onClose();
+  };
   if (!selectedVideo) {
     return null;
   }
@@ -31,6 +40,9 @@ const VideoDetail = ({ selectedVideo, setSelectedVideo }) => {
           <SanitizedHTML html={description} />
         </StyledOverlay.Description>
         <StyledOverlay.PublishTime>Published: {publishTime}</StyledOverlay.PublishTime>
+        <StyledOverlay.Favorite>
+          Favorite <FavoriteStar selectedVideo={selectedVideo} />
+        </StyledOverlay.Favorite>
         <StyledOverlay.Title>Similar videos</StyledOverlay.Title>
         <VideoCarrousel
           videoList={relatedVideos?.items}

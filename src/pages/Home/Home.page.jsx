@@ -1,10 +1,12 @@
 import React from 'react';
-import VideoGrid from 'components/VideoGrid';
+import HomeVideoGrid from 'components/HomeVideoGrid';
+import { HomeHeader } from './Home.styled';
 
 const HomePage = () => {
   return (
     <>
-      <VideoGrid />
+      <HomeHeader>Home</HomeHeader>
+      <HomeVideoGrid />
     </>
   );
 };

@@ -4,7 +4,7 @@ import { GlobalStateProvider, useGlobalState } from './GlobalStateProvider.provi
 
 const FakeConsumer = () => {
   const {
-    state: { searchValue, theme },
+    state: { searchValue, theme, favorites },
     dispatch,
   } = useGlobalState();
   return (
@@ -23,12 +23,27 @@ const FakeConsumer = () => {
       </button>
       <button
         type="button"
+        onClick={() =>
+          dispatch({ type: 'addToFavorites', value: { id: { videoId: 'test' } } })
+        }
+      >
+        addToFavorites
+      </button>
+      <button
+        type="button"
+        onClick={() => dispatch({ type: 'removeFromFavorites', value: 'test' })}
+      >
+        removeFromFavorites
+      </button>
+      <button
+        type="button"
         onClick={() => dispatch({ type: 'unknownAction', value: 'the unknown' })}
       >
         unknownAction
       </button>
       <span>searchValue:{searchValue}</span>
       <span>theme:{theme}</span>
+      <span>favorites:{favorites.length}</span>
     </>
   );
 };
@@ -42,13 +57,16 @@ describe('global state provider', () => {
 
   it('sends data to hook', () => {
     render(
-      <GlobalStateProvider value={{ state: { searchValue: 'provider', theme: 'dark' } }}>
+      <GlobalStateProvider
+        value={{ state: { searchValue: 'provider', theme: 'dark', favorites: [{}, {}] } }}
+      >
         <FakeConsumer />
       </GlobalStateProvider>
     );
 
     expect(screen.getByText('searchValue:provider')).toBeTruthy();
     expect(screen.getByText('theme:dark')).toBeTruthy();
+    expect(screen.getByText('favorites:2')).toBeTruthy();
   });
 
   it('dispatches events', async () => {
@@ -59,12 +77,19 @@ describe('global state provider', () => {
     );
     expect(screen.getByText('searchValue:')).toBeTruthy();
     expect(screen.getByText('theme:light')).toBeTruthy();
+    expect(screen.getByText('favorites:0')).toBeTruthy();
     await act(async () => {
       fireEvent.click(screen.getByText(/setSearch/i));
       fireEvent.click(screen.getByText(/updateTheme/i));
+      fireEvent.click(screen.getByText(/addToFavorites/i));
     });
     expect(screen.getByText('searchValue:seek')).toBeTruthy();
     expect(screen.getByText('theme:shiny')).toBeTruthy();
+    expect(screen.getByText('favorites:1')).toBeTruthy();
+    await act(async () => {
+      fireEvent.click(screen.getByText(/removeFromFavorites/i));
+    });
+    expect(screen.getByText('favorites:0')).toBeTruthy();
   });
 
   it('fails to dispatch unknown action', async () => {

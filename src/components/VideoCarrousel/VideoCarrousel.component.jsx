@@ -4,7 +4,7 @@ import SanitizedHTML from 'ui/SanitizedHTML';
 import { StyledCarrousel } from './VideoCarrousel.styled';
 
 const VideoCarrousel = ({ videoList, setSelectedVideo }) => {
-  const sliderRef = useResetScroll(null);
+  const sliderRef = useResetScroll(videoList);
   if (!videoList) {
     return null;
   }
@@ -14,9 +14,13 @@ const VideoCarrousel = ({ videoList, setSelectedVideo }) => {
       <StyledCarrousel.Slider ref={sliderRef}>
         {videoList.map((item) => {
           const {
-            snippet: { title, thumbnails },
+            snippet,
             id: { videoId },
           } = item;
+          if (!snippet) {
+            return null;
+          }
+          const { title, thumbnails } = snippet;
           return (
             <StyledCarrousel.Video key={videoId} onClick={() => setSelectedVideo(item)}>
               <StyledCarrousel.Thumbnail src={thumbnails?.medium?.url} alt={title} />

@@ -2,15 +2,15 @@ import React from 'react';
 import { screen, render, act } from '@testing-library/react';
 import { ProviderWrapper } from 'test';
 import api from 'api';
-import App from './App.component';
+import Home from './Home.page';
 
 jest.mock('api');
 api.searchVideos.mockResolvedValue({ items: [] });
-describe('app', () => {
-  it('to have the navbar available', async () => {
+describe('home', () => {
+  it('to have the header', async () => {
     await act(async () => {
-      render(<App />, { wrapper: ProviderWrapper });
+      render(<Home />, { wrapper: ProviderWrapper });
     });
-    expect(screen.queryByRole('navigation')).toBeTruthy();
+    expect(screen.queryByText('Home')).toBeTruthy();
   });
 });

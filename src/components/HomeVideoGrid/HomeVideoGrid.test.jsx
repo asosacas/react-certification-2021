@@ -2,13 +2,13 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import api from 'api';
 import { ProviderWrapper } from 'test';
-import VideoGrid from './VideoGrid.component';
+import HomeVideoGrid from './HomeVideoGrid.component';
 
 jest.mock('api');
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
   useParams: () => ({
-    videoId: 'video-id',
+    videoId: 'video1',
   }),
 }));
 const videoData = [
@@ -44,19 +44,10 @@ api.searchVideos.mockResolvedValue({ items: videoData });
 describe('video grid', () => {
   it('has the right amount of img elements', async () => {
     await act(async () => {
-      render(<VideoGrid videoHandler={jest.fn} items={videoData} />, {
+      render(<HomeVideoGrid videoHandler={jest.fn} />, {
         wrapper: ProviderWrapper,
       });
     });
     expect(document.querySelectorAll('img').length).toBe(2);
-  });
-
-  it('has an invalid video', async () => {
-    await act(async () => {
-      render(<VideoGrid videoHandler={() => false} items={null} />, {
-        wrapper: ProviderWrapper,
-      });
-    });
-    expect(document.querySelectorAll('img').length).toBe(0);
   });
 });

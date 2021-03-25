@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledNavBar = styled.nav`
   width: 100%;
@@ -38,4 +39,13 @@ StyledNavBar.ThemeSwitch = styled.div`
   > * {
     vertical-align: middle;
   }
+  cursor: pointer;
+`;
+
+StyledNavBar.AuthButton = styled.div`
+  cursor: pointer;
+`;
+
+StyledNavBar.Link = styled(Link)`
+  color: ${(props) => props.theme.fontColorContrast};
 `;
