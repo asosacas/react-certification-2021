@@ -51,3 +51,8 @@ StyledOverlay.PublishTime = styled.div`
   font-size: small;
   align-self: flex-start;
 `;
+StyledOverlay.Favorite = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;

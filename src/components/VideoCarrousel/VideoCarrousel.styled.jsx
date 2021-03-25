@@ -12,7 +12,8 @@ StyledCarrousel.Slider = styled.div`
 `;
 
 StyledCarrousel.Video = styled.div`
-  padding: 0 10px 0 10px;
+  margin: 0 10px 0 10px;
+  cursor: pointer;
 `;
 
 StyledCarrousel.Thumbnail = styled.img``;

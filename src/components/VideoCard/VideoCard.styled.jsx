@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import FavoriteStar from 'components/FavoriteStar';
 
 export const StyledCard = styled.div`
   width: 350px;
@@ -13,9 +14,29 @@ export const StyledCard = styled.div`
   transition: 0.3s;
   text-align: center;
   overflow: hidden;
-
+  cursor: pointer;
+  ${FavoriteStar} {
+    margin-left: 20px;
+    margin-top: 5px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    font-size: x-large;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    background-color: white;
+    .favorite-off {
+      color: black;
+    }
+  }
   :hover {
     box-shadow: 3px 3px 3px ${(props) => props.theme.cardShadow};
+    ${FavoriteStar} {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s, opacity 0.3s linear;
+    }
   }
 `;
 

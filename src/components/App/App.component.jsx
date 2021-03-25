@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGlobalState } from 'providers/GlobalStateProvider';
-
+import { HashRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Layout from 'components/Layout';
 import themes from 'themes';
@@ -11,7 +11,9 @@ const App = () => {
   } = useGlobalState();
   return (
     <ThemeProvider theme={themes[theme]}>
-      <Layout />
+      <HashRouter>
+        <Layout />
+      </HashRouter>
     </ThemeProvider>
   );
 };

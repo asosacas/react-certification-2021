@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const GlobalContext = React.createContext();
 
@@ -10,6 +11,19 @@ const globalReducer = (state, action) => {
     case 'updateTheme': {
       return { ...state, theme: action.value };
     }
+    case 'addToFavorites': {
+      const newState = { ...state, favorites: [...state.favorites, action.value] };
+      localStorage.setItem('favorite_videos', JSON.stringify(newState.favorites));
+      return newState;
+    }
+    case 'removeFromFavorites': {
+      const newState = {
+        ...state,
+        favorites: state.favorites.filter((video) => video.id.videoId !== action.value),
+      };
+      localStorage.setItem('favorite_videos', JSON.stringify(newState.favorites));
+      return newState;
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -17,11 +31,17 @@ const globalReducer = (state, action) => {
 };
 
 const GlobalStateProvider = ({ children, ...props }) => {
+  const { isAuthenticated, isLoading } = useAuth0();
   const [state, dispatch] = React.useReducer(globalReducer, {
     searchValue: '',
     theme: 'light',
+    favorites: JSON.parse(localStorage.getItem('favorite_videos')) || [],
   });
-  const value = { state, dispatch };
+  const isFavorite = (videoId) => {
+    return !!state.favorites.filter((video) => video.id.videoId === videoId).length;
+  };
+  const value = { state, dispatch, isAuthenticated, isLoading, isFavorite };
+
   return (
     <GlobalContext.Provider value={value} {...props}>
       {children}

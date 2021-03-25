@@ -4,7 +4,7 @@ import SanitizedHTML from 'ui/SanitizedHTML';
 import { StyledCarrousel } from './VideoCarrousel.styled';
 
 const VideoCarrousel = ({ videoList, setSelectedVideo }) => {
-  const sliderRef = useResetScroll(null);
+  const sliderRef = useResetScroll(videoList);
   if (!videoList) {
     return null;
   }

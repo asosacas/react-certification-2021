@@ -1,30 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import VideoCard from 'components/VideoCard';
 import VideoDetail from 'components/VideoDetail';
-import api from 'api';
-import { useGlobalState } from 'providers/GlobalStateProvider';
+import { useParams, useHistory } from 'react-router-dom';
 import { StyledGrid } from './VideoGrid.styled';
 
-const VideoGrid = () => {
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [results, setResults] = useState({ items: [] });
-  const {
-    state: { searchValue },
-  } = useGlobalState();
+const VideoGrid = ({ items, relatedMode, basePath, videoHandler }) => {
+  const [selectedVideo, setMainSelectedVideo] = useState(null);
+  const { videoId } = useParams();
+  const history = useHistory();
+
+  const returnToRoot = useCallback(() => {
+    history.push(`${basePath}`);
+  }, [history, basePath]);
 
   useEffect(() => {
-    // If there's no search, let's load wizeline once to have something to show
-    api.searchVideos(searchValue || 'wizeline').then((searchResults) => {
-      setResults(searchResults);
-    });
-  }, [searchValue]);
+    const handleVideoId = async () => {
+      if (videoId) {
+        const validVideo = await videoHandler({ videoId, items, setMainSelectedVideo });
+        if (!validVideo) {
+          returnToRoot();
+        }
+      } else {
+        setMainSelectedVideo(null);
+      }
+    };
+    handleVideoId();
+  }, [videoId, items, returnToRoot, videoHandler]);
 
+  const updatePath = (_item) => history.push(`${basePath}/${_item.id.videoId}`);
+
+  if (!items) {
+    return null;
+  }
   return (
     <>
-      <VideoDetail selectedVideo={selectedVideo} setSelectedVideo={setSelectedVideo} />
+      <VideoDetail
+        selectedVideo={selectedVideo}
+        setSelectedVideo={updatePath}
+        relatedMode={relatedMode}
+        onClose={returnToRoot}
+      />
       <StyledGrid>
-        {results.items.map((item) => (
-          <VideoCard key={item.etag} {...item} onClick={() => setSelectedVideo(item)} />
+        {items.map((item) => (
+          <VideoCard key={item.etag} video={item} onClick={() => updatePath(item)} />
         ))}
       </StyledGrid>
     </>
