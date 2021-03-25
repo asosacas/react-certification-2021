@@ -1,6 +1,10 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import api from 'api';
 import VideoDetail from './VideoDetail.component';
+
+jest.mock('api');
 
 const videoItem = {
   id: {
@@ -17,28 +21,40 @@ const videoItem = {
   },
 };
 
+// Ignoring detail's carrousel in this test. This has it's own test in the carrousel folder.
+api.getRelatedVideos.mockResolvedValue({ items: [] });
+
 describe('video detail', () => {
-  it('iframe is rendered', () => {
-    render(<VideoDetail selectedVideo={videoItem} />);
+  it('iframe is rendered', async () => {
+    await act(async () => {
+      render(<VideoDetail selectedVideo={videoItem} />);
+    });
+
     expect(document.querySelectorAll('iframe').length).toBe(1);
   });
 
-  it('iframe has the right video id for the src', () => {
-    render(<VideoDetail selectedVideo={videoItem} />);
+  it('iframe has the right video id for the src', async () => {
+    await act(async () => {
+      render(<VideoDetail selectedVideo={videoItem} />);
+    });
     expect(document.querySelectorAll('iframe')[0].src).toContain('testVideoId');
   });
 
-  it('title is rendered', () => {
-    render(<VideoDetail selectedVideo={videoItem} />);
-    expect(screen.queryByText('Title').tagName).toBe('DIV');
+  it('title is rendered', async () => {
+    await act(async () => {
+      render(<VideoDetail selectedVideo={videoItem} />);
+    });
+    expect(screen.queryByText('Title').tagName).toBe('SPAN');
   });
 
-  it('clicks inside container handle setter correctly', () => {
+  it('clicks inside container handle setter correctly', async () => {
     const mockedSet = jest.fn();
-    render(<VideoDetail selectedVideo={videoItem} setSelectedVideo={mockedSet} />);
+    await act(async () => {
+      render(<VideoDetail selectedVideo={videoItem} setSelectedVideo={mockedSet} />);
+    });
     expect(mockedSet.mock.calls.length).toBe(0);
     fireEvent.click(screen.getByText(/Title/i));
-    expect(screen.queryByText('Title').tagName).toBe('DIV');
+    expect(screen.queryByText('Title').tagName).toBe('SPAN');
     expect(mockedSet.mock.calls.length).toBe(0);
     fireEvent.click(screen.getByText(/X/i));
     expect(mockedSet.mock.calls.length).toBe(1);

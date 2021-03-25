@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react';
 import VideoCard from 'components/VideoCard';
 import VideoDetail from 'components/VideoDetail';
 import api from 'api';
+import { useGlobalState } from 'providers/GlobalStateProvider';
 import { StyledGrid } from './VideoGrid.styled';
 
-const VideoGrid = ({ search }) => {
+const VideoGrid = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [results, setResults] = useState({ items: [] });
+  const {
+    state: { searchValue },
+  } = useGlobalState();
 
   useEffect(() => {
     // If there's no search, let's load wizeline once to have something to show
-    api.searchVideos(search || 'wizeline').then((searchResults) => {
+    api.searchVideos(searchValue || 'wizeline').then((searchResults) => {
       setResults(searchResults);
     });
-  }, [search]);
+  }, [searchValue]);
 
   return (
     <>

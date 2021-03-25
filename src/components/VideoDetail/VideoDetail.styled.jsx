@@ -19,7 +19,7 @@ StyledOverlay.Container = styled.div`
   align-items: center;
   width: 70%;
   height: 80%;
-  background-color: white;
+  background-color: ${(props) => props.theme.mainBackground};
   cursor: default;
   padding: 20px;
   overflow-y: auto;
@@ -35,6 +35,7 @@ StyledOverlay.CloseButton = styled.button`
   background-color: transparent;
   border: none;
   font-size: 20px;
+  color: inherit;
 `;
 StyledOverlay.Title = styled.div`
   font-size: large;

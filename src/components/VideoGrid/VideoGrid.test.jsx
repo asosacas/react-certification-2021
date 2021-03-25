@@ -1,6 +1,7 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
 import api from 'api';
+import { GlobalStateProvider } from 'providers/GlobalStateProvider';
 import VideoGrid from './VideoGrid.component';
 
 jest.mock('api');
@@ -36,7 +37,11 @@ api.searchVideos.mockResolvedValue({ items: videoData });
 describe('video grid', () => {
   it('has the right amount of img elements', async () => {
     await act(async () => {
-      render(<VideoGrid />);
+      render(
+        <GlobalStateProvider>
+          <VideoGrid />
+        </GlobalStateProvider>
+      );
     });
     expect(document.querySelectorAll('img').length).toBe(2);
   });

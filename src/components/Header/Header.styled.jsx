@@ -33,3 +33,9 @@ StyledNavBar.Right = styled.div`
     margin-right: 16px;
   }
 `;
+
+StyledNavBar.ThemeSwitch = styled.div`
+  > * {
+    vertical-align: middle;
+  }
+`;

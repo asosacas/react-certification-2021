@@ -27,6 +27,6 @@ describe('video card', () => {
 
   it('title is rendered', () => {
     render(<VideoCard {...videoItem} />);
-    expect(screen.queryByText('Title').tagName).toBe('H3');
+    expect(screen.queryByText('Title').tagName).toBe('SPAN');
   });
 });
