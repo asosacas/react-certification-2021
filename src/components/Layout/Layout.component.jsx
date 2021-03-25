@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import ProtectedRoute from 'utils/ProtectedRoute';
 import Header from 'components/Header';
-import NotFound from 'components/NotFound';
+import NotFound from 'pages/NotFound';
 import HomePage from 'pages/Home';
 import FavoritesPage from 'pages/Favorites';
 import { StyledMain } from './Layout.styled';

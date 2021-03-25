@@ -1,6 +1,7 @@
 import { act } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import api from 'api';
+import { ProviderWrapper } from 'test';
 import useVideoDetails from './videoDetails.hook';
 
 jest.mock('api');
@@ -42,12 +43,16 @@ describe('video details hook', () => {
   it('has empty result with no video provided', () => {
     const {
       result: { current },
-    } = renderHook(() => useVideoDetails());
+    } = renderHook(() => useVideoDetails(null, 'api'), {
+      wrapper: ProviderWrapper,
+    });
     expect(current).toStrictEqual({});
   });
 
-  it('has data fetched once a valid video is provided', async () => {
-    const { result, rerender } = renderHook((video) => useVideoDetails(video));
+  it('has data fetched once a valid video is provided in api mode', async () => {
+    const { result, rerender } = renderHook((video) => useVideoDetails(video, 'api'), {
+      wrapper: ProviderWrapper,
+    });
     await act(async () => {
       rerender(selectedVideo);
     });
@@ -56,5 +61,22 @@ describe('video details hook', () => {
     expect(description).toBe('Description');
     expect(publishTime).toBe('2020');
     expect(relatedVideos.items.length).toBe(2);
+  });
+
+  it('has data fetched once a valid video is provided in favorites mode', async () => {
+    const { result, rerender } = renderHook(
+      (video) => useVideoDetails(video, 'favorites'),
+      {
+        wrapper: ProviderWrapper,
+      }
+    );
+    await act(async () => {
+      rerender(selectedVideo);
+    });
+    const { title, description, publishTime, relatedVideos } = result.current;
+    expect(title).toBe('Title');
+    expect(description).toBe('Description');
+    expect(publishTime).toBe('2020');
+    expect(relatedVideos.items.length).toBe(0);
   });
 });

@@ -1,14 +1,14 @@
 import React from 'react';
-import { act, render } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import api from 'api';
-import { ProviderWrapper } from 'test';
-import VideoGrid from './VideoGrid.component';
+import { ProviderWithStateWrapper } from 'test';
+import FavoritesVideoGrid from './FavoritesVideoGrid.component';
 
 jest.mock('api');
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
   useParams: () => ({
-    videoId: 'video-id',
+    videoId: 'video1',
   }),
 }));
 const videoData = [
@@ -16,8 +16,8 @@ const videoData = [
     etag: '1',
     id: { videoId: 'video1' },
     snippet: {
-      title: 'Title',
-      description: 'This is the description',
+      title: 'Title 1',
+      description: 'This is the description 1',
       thumbnails: {
         medium: {
           url: 'http://theurl.com',
@@ -41,22 +41,16 @@ const videoData = [
 ];
 
 api.searchVideos.mockResolvedValue({ items: videoData });
-describe('video grid', () => {
-  it('has the right amount of img elements', async () => {
+describe('favorites video grid', () => {
+  it('has the right video loaded', async () => {
     await act(async () => {
-      render(<VideoGrid videoHandler={jest.fn} items={videoData} />, {
-        wrapper: ProviderWrapper,
+      render(<FavoritesVideoGrid videoHandler={jest.fn} />, {
+        wrapper: ProviderWithStateWrapper({
+          value: { isFavorite: jest.fn, state: { favorites: videoData } },
+        }),
       });
     });
-    expect(document.querySelectorAll('img').length).toBe(2);
-  });
-
-  it('has an invalid video', async () => {
-    await act(async () => {
-      render(<VideoGrid videoHandler={() => false} items={null} />, {
-        wrapper: ProviderWrapper,
-      });
-    });
-    expect(document.querySelectorAll('img').length).toBe(0);
+    // the grid representation, and the loaded detail
+    expect(screen.queryAllByText('This is the description 1').length).toBe(2);
   });
 });
